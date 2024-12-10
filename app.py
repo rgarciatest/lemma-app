@@ -18,21 +18,23 @@ def ReadTextFile(path_text):
 def cargar_modelo():
 
 
-    url = "https://drive.google.com/uc?id=1zspq3faEXDqRQZzpIn0mxRil_40FczwA&export=download"
-    response = requests.get(url)
-    if response.status_code == 200:
-        archivo_pkl = BytesIO(response.content)
-        nlp = pickle.load(archivo_pkl)
-        print(nlp)
-    else:
-        print("Error al descargar el archivo. Código de estado:", response.status_code)
+    # url = "https://drive.google.com/uc?id=1zspq3faEXDqRQZzpIn0mxRil_40FczwA&export=download"
+    # response = requests.get(url)
+    # if response.status_code == 200:
+    #     archivo_pkl = BytesIO(response.content)
+    #     nlp = pickle.load(archivo_pkl)
+    #     print(nlp)
+    # else:
+    #     print("Error al descargar el archivo. Código de estado:", response.status_code)
+
+
 
     SPACY_MODEL = 'es_core_news_sm'
     # SPACY_MODEL = 'es_core_news_lg'
     # with open(f"spacy_es/{SPACY_MODEL}.pkl", "rb") as f:
     #     nlp = pickle.load(f)
 
-    # nlp = spacy.load(SPACY_MODEL)
+    nlp = spacy.load(SPACY_MODEL)
     
     # texto = "Los perros corren rápidamente."
     # doc = nlp(texto)
