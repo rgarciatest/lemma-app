@@ -14,7 +14,6 @@ def InitFirebase():
     import firebase_admin
     from firebase_admin import credentials
     from firebase_admin import db
-
     firebase_credentials_json = os.getenv('FIREBASE_CREDENTIALS')
     firebase_credentials = json.loads(firebase_credentials_json)
     if not firebase_admin._apps:
@@ -27,15 +26,27 @@ def main():
     height = 500
     st.title("Lematizador de Texto")
     InitFirebase()
+    trial = 45
+    trial = st.number_input("Insert trial")
     if st.button("GET Firebase"):
         host = 1
-        trial = 45
         ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').get()
         st.subheader("FB")
         st.write(ref)
 
     st.markdown('---')
-    st.subheader("Texto cargado")
+    trial_in = random.randint(1,100)
+    trial_in = st.number_input("Insert trial")
+    if st.button("SEND Firebase"):
+        host = 1
+        FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial_in }
+        ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial_in:03d}').update(FIREBASEDATA)
+        # ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial_in:03d}').get()
+        ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').get()
+        st.subheader("FB")
+        st.write(ref)
+
+    st.markdown('---')
 
 if __name__ == "__main__":
     main()
