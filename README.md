@@ -1,2 +1,2 @@
 # lemma-app
- text preprocessing streamlit test
+Text preprocessing streamlit test
