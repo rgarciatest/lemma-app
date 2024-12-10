@@ -26,8 +26,9 @@ def main():
     height = 500
     st.title("Lematizador de Texto")
     InitFirebase()
-    trial = 45
-    trial = st.number_input("Insert trial", value=45)
+    # trial = 45
+    trial = st.number_input("Get trial", value=45)
+    st.write("The current number is ", trial)
     trial = int(trial)
     if st.button("GET Firebase"):
         host = 1
@@ -36,17 +37,19 @@ def main():
         st.write(ref_get)
 
     st.markdown('---')
-    # trial_in = random.randint(1,100)
-    trial_in = st.number_input("Insert trial", value=45)
-    trial_in = int(trial_in)
-    if st.button("SEND Firebase"):
-        host = 1
-        FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial_in }
-        ref_up = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial_in:03d}').update(FIREBASEDATA)
-        # ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial_in:03d}').get()
-        # ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').get()
-        # st.subheader("FB")
-        # st.write(ref)
+    with st.container():
+        # trial_in = random.randint(1,100)
+        trial_in = st.number_input("Update trial", value=45)
+        trial_in = int(trial_in)
+        st.write("The current number is ", trial_in)
+        if st.button("SEND Firebase"):
+            host = 1
+            FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial_in }
+            ref_up = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial_in:03d}').update(FIREBASEDATA)
+            # ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial_in:03d}').get()
+            # ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').get()
+            # st.subheader("FB")
+            # st.write(ref)
 
     st.markdown('---')
 
