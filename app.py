@@ -25,8 +25,6 @@ def cargar_modelo(SPACY_MODEL):
     # else:
     #     print("Error al descargar el archivo. Código de estado:", response.status_code)
 
-
-
     # SPACY_MODEL = 'es_core_news_sm'
     # SPACY_MODEL = 'es_core_news_lg'
     # with open(f"spacy_es/{SPACY_MODEL}.pkl", "rb") as f:
@@ -48,37 +46,33 @@ def lematizar_texto(texto, nlp):
     return ' '.join(lemas)
 
 def main():
-    height = 500
+    height = 300
     st.title("Lematizador de Texto en Español con Modelo Remoto")
-    
+
     opciones = ["es_core_news_sm", "en_core_web_sm", "es_core_news_lg"]
-
-    # # Creando el multiselect
-    # seleccionadas = st.multiselect(
-    #     "Selecciona una o varias opciones:",
-    #     opciones,
-    #     default=["es_core_news_sm"]  # Opción seleccionada por defecto
-    # )
-
-    # Creando el selectbox
     SPACY_MODEL = st.selectbox(
         "Selecciona una opción:",
         opciones,
-        index=0  # Índice de la opción seleccionada por defecto (opcional)
+        index=0  
     )
-
-    # Mostrando la opción seleccionada
     st.write("Has seleccionado:", SPACY_MODEL)
-
-
-    # SPACY_MODEL = 'es_core_news_sm'
     # SPACY_MODEL = 'es_core_news_lg'
-    # Cargar el modelo de SpaCy
-    nlp = cargar_modelo(SPACY_MODEL)
+
+
     
     # Subir archivo de texto
     # uploaded_file = st.file_uploader("Sube un archivo de texto", type="txt")
-    uploaded_file = ReadTextFile('diag-sample.txt')
+
+    data_opc = ["es", "en"]
+    DATA = st.selectbox(
+        "Selecciona un texto:",
+        data_opc,
+        index=0  
+    )
+
+    uploaded_file = ReadTextFile('fdata/data-{DATA}.txt')
+    nlp = cargar_modelo(SPACY_MODEL)
+
 
     if uploaded_file is not None:
         # Leer el contenido del archivo
