@@ -8,7 +8,6 @@ import os
 import json
 import random
 
-
 def ReadTextFile(path_text):
     test_tmp = []
     for line in open(path_text): 
@@ -16,7 +15,6 @@ def ReadTextFile(path_text):
             test_tmp.append(line)
     text = ''.join(test_tmp)
     return text
-
 
 CONFIG = {"DB" : None,}
 def InitFirebase():
