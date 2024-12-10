@@ -46,8 +46,8 @@ def lematizar_texto(texto, nlp):
     return ' '.join(lemas)
 
 def main():
-    height = 300
-    st.title("Lematizador de Texto en Español con Modelo Remoto")
+    height = 400
+    st.title("Lematizador de Texto")
 
     opciones = ["es_core_news_sm", "en_core_web_sm", "es_core_news_lg"]
     SPACY_MODEL = st.selectbox(
@@ -70,7 +70,7 @@ def main():
         index=0  
     )
 
-    uploaded_file = ReadTextFile('fdata/data-{DATA}.txt')
+    uploaded_file = ReadTextFile(f'data/data-{DATA}.txt')
     nlp = cargar_modelo(SPACY_MODEL)
 
 
