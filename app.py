@@ -5,7 +5,6 @@ import pickle
 import requests
 from io import BytesIO
 
-
 def ReadTextFile(path_text):
     test_tmp = []
     for line in open(path_text): 
@@ -57,6 +56,7 @@ def main():
     )
     st.write("Has seleccionado:", SPACY_MODEL)
     # SPACY_MODEL = 'es_core_news_lg'
+    nlp = cargar_modelo(SPACY_MODEL)
 
 
     
@@ -71,7 +71,6 @@ def main():
     )
 
     uploaded_file = ReadTextFile(f'data/data-{DATA}.txt')
-    nlp = cargar_modelo(SPACY_MODEL)
 
 
     if uploaded_file is not None:
