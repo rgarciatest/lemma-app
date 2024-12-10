@@ -15,9 +15,7 @@ def ReadTextFile(path_text):
     return text
 
 @st.cache_resource
-def cargar_modelo():
-
-
+def cargar_modelo(SPACY_MODEL):
     # url = "https://drive.google.com/uc?id=1zspq3faEXDqRQZzpIn0mxRil_40FczwA&export=download"
     # response = requests.get(url)
     # if response.status_code == 200:
@@ -29,7 +27,7 @@ def cargar_modelo():
 
 
 
-    SPACY_MODEL = 'es_core_news_sm'
+    # SPACY_MODEL = 'es_core_news_sm'
     # SPACY_MODEL = 'es_core_news_lg'
     # with open(f"spacy_es/{SPACY_MODEL}.pkl", "rb") as f:
     #     nlp = pickle.load(f)
@@ -53,8 +51,30 @@ def main():
     height = 500
     st.title("Lematizador de Texto en Español con Modelo Remoto")
     
+    opciones = ["es_core_news_sm", "en_core_web_sm", "es_core_news_lg"]
+
+    # # Creando el multiselect
+    # seleccionadas = st.multiselect(
+    #     "Selecciona una o varias opciones:",
+    #     opciones,
+    #     default=["es_core_news_sm"]  # Opción seleccionada por defecto
+    # )
+
+    # Creando el selectbox
+    SPACY_MODEL = st.selectbox(
+        "Selecciona una opción:",
+        opciones,
+        index=0  # Índice de la opción seleccionada por defecto (opcional)
+    )
+
+    # Mostrando la opción seleccionada
+    st.write("Has seleccionado:", SPACY_MODEL)
+
+
+    # SPACY_MODEL = 'es_core_news_sm'
+    # SPACY_MODEL = 'es_core_news_lg'
     # Cargar el modelo de SpaCy
-    nlp = cargar_modelo()
+    nlp = cargar_modelo(SPACY_MODEL)
     
     # Subir archivo de texto
     # uploaded_file = st.file_uploader("Sube un archivo de texto", type="txt")
