@@ -27,7 +27,7 @@ def cargar_modelo():
     else:
         print("Error al descargar el archivo. Código de estado:", response.status_code)
 
-    # SPACY_MODEL = 'es_core_news_sm'
+    SPACY_MODEL = 'es_core_news_sm'
     # SPACY_MODEL = 'es_core_news_lg'
     # with open(f"spacy_es/{SPACY_MODEL}.pkl", "rb") as f:
     #     nlp = pickle.load(f)
