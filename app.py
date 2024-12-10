@@ -31,22 +31,22 @@ def main():
     trial = int(trial)
     if st.button("GET Firebase"):
         host = 1
-        ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').get()
+        ref_get = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').get()
         st.subheader("FB")
-        st.write(ref)
+        st.write(ref_get)
 
     st.markdown('---')
-    trial_in = random.randint(1,100)
+    # trial_in = random.randint(1,100)
     trial_in = st.number_input("Insert trial", value=45)
     trial_in = int(trial_in)
     if st.button("SEND Firebase"):
         host = 1
         FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial_in }
-        ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial_in:03d}').update(FIREBASEDATA)
+        ref_up = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial_in:03d}').update(FIREBASEDATA)
         # ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial_in:03d}').get()
-        ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').get()
-        st.subheader("FB")
-        st.write(ref)
+        # ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').get()
+        # st.subheader("FB")
+        # st.write(ref)
 
     st.markdown('---')
 
