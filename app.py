@@ -27,7 +27,8 @@ def main():
     st.title("Lematizador de Texto")
     InitFirebase()
     trial = 45
-    trial = st.number_input("Insert trial")
+    trial = st.number_input("Insert trial", value=45)
+    trial = int(trial)
     if st.button("GET Firebase"):
         host = 1
         ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').get()
@@ -36,7 +37,8 @@ def main():
 
     st.markdown('---')
     trial_in = random.randint(1,100)
-    trial_in = st.number_input("Insert trial")
+    trial_in = st.number_input("Insert trial", value=45)
+    trial_in = int(trial_in)
     if st.button("SEND Firebase"):
         host = 1
         FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial_in }
