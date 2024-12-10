@@ -6,6 +6,8 @@ import requests
 from io import BytesIO
 import os
 import json
+import random
+
 
 def ReadTextFile(path_text):
     test_tmp = []
@@ -35,7 +37,6 @@ def InitFirebase():
         else: firebase_admin.get_app()
         CONFIG["DB"] = db
 
-
 @st.cache_resource
 def cargar_modelo(SPACY_MODEL):
     nlp = spacy.load(SPACY_MODEL)
@@ -57,14 +58,24 @@ def main():
     uploaded_file = ReadTextFile(f'data/data-{DATA}.txt')
 
     InitFirebase()
-    subj = 1
-    trial = 0
-    ref = CONFIG["DB"].reference('Test').child(f'subj_{subj:02d}').child(f'trial_{trial:03d}').get()
+    if st.button("GET Firebase"):
+        subj = 1
+        trial = 0
+        ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial:03d}').get()
+        st.subheader("FB")
+        st.write(ref)
 
-    st.subheader("FB")
-    st.write(ref)
+    if st.button("SEND Firebase"):
+        subj = 1
+        trial = random.randint(1,100)
+        FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial }
+        ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial:03d}').update(FIREBASEDATA)
+        # ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial:03d}').get()
+        ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').get()
+        st.subheader("FB")
+        st.write(ref)
+
     st.markdown('---')
-
     if uploaded_file is not None:
         texto = uploaded_file
         st.subheader("Texto cargado")
