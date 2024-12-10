@@ -4,6 +4,8 @@ import spacy
 import pickle
 import requests
 from io import BytesIO
+import os
+import json
 
 def ReadTextFile(path_text):
     test_tmp = []
@@ -12,6 +14,27 @@ def ReadTextFile(path_text):
             test_tmp.append(line)
     text = ''.join(test_tmp)
     return text
+
+
+CONFIG = {"DB" : None,}
+def InitFirebase():
+    import firebase_admin
+    from firebase_admin import credentials
+    from firebase_admin import db
+
+    # Leer la variable de entorno
+    firebase_credentials_json = os.getenv('FIREBASE_CREDENTIALS')
+    if not firebase_credentials_json:
+        raise ValueError("La variable de entorno 'FIREBASE_CREDENTIALS' no está configurada.")
+    else:
+        if not firebase_admin._apps:
+            # cred = credentials.Certificate('firebase-adminsdk.json')
+            firebase_credentials = json.loads(firebase_credentials_json)
+            cred = credentials.Certificate(firebase_credentials)
+            default_app = firebase_admin.initialize_app(cred, {"databaseURL": "https://fbtesting-intl-default-rtdb.firebaseio.com",})
+        else: firebase_admin.get_app()
+        CONFIG["DB"] = db
+
 
 @st.cache_resource
 def cargar_modelo(SPACY_MODEL):
@@ -32,6 +55,15 @@ def main():
 
     DATA = "es"
     uploaded_file = ReadTextFile(f'data/data-{DATA}.txt')
+
+    InitFirebase()
+    subj = 1
+    trial = 0
+    ref = CONFIG["DB"].reference('Test').child(f'subj_{subj:02d}').child(f'trial_{trial:03d}').get()
+
+    st.subheader("FB")
+    st.write(ref)
+    st.markdown('---')
 
     if uploaded_file is not None:
         texto = uploaded_file
