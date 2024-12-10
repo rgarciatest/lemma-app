@@ -32,6 +32,8 @@ def InitFirebase():
         if not firebase_admin._apps:
             # cred = credentials.Certificate('firebase-adminsdk.json')
             firebase_credentials = json.loads(firebase_credentials_json)
+            # print(firebase_credentials)
+            st.write(firebase_credentials)
             cred = credentials.Certificate(firebase_credentials)
             default_app = firebase_admin.initialize_app(cred, {"databaseURL": "https://fbtesting-intl-default-rtdb.firebaseio.com",})
         else: firebase_admin.get_app()
@@ -57,8 +59,8 @@ def main():
     DATA = "es"
     uploaded_file = ReadTextFile(f'data/data-{DATA}.txt')
 
-    InitFirebase()
     if st.button("GET Firebase"):
+        InitFirebase()
         host = 1
         trial = 45
         ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').get()
