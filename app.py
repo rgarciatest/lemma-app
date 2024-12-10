@@ -20,22 +20,24 @@ def cargar_modelo():
     # Cargar el modelo español "es_core_news_sm" desde el repositorio de spaCy
     # nlp = spacy.load("https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.0.0/es_core_news_sm-3.0.0.tar.gz")
 
-    # Cargar el modelo de SpaCy desde el archivo pickle
-    # with open("es_core_news_sm.pkl", "rb") as f:
-    #     nlp = pickle.load(f)
+
 
     # spacy_model = "es_core_news_lg"
     # nlp = spacy.load("/home/ax/git-repos/app-dev/spacy-models/"+spacy_model) 
 
 
-    url = "https://drive.google.com/uc?id=1zspq3faEXDqRQZzpIn0mxRil_40FczwA&export=download"
-    response = requests.get(url)
-    if response.status_code == 200:
-        archivo_pkl = BytesIO(response.content)
-        nlp = pickle.load(archivo_pkl)
-        print(nlp)
-    else:
-        print("Error al descargar el archivo. Código de estado:", response.status_code)
+    # url = "https://drive.google.com/uc?id=1zspq3faEXDqRQZzpIn0mxRil_40FczwA&export=download"
+    # response = requests.get(url)
+    # if response.status_code == 200:
+    #     archivo_pkl = BytesIO(response.content)
+    #     nlp = pickle.load(archivo_pkl)
+    #     print(nlp)
+    # else:
+    #     print("Error al descargar el archivo. Código de estado:", response.status_code)
+
+    # Cargar el modelo de SpaCy desde el archivo pickle
+    with open("spacy_es/es_core_news_sm.pkl", "rb") as f:
+        nlp = pickle.load(f)
 
     # texto = "Los perros corren rápidamente."
     # doc = nlp(texto)
