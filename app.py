@@ -53,8 +53,8 @@ def main():
     height = 500
     st.title("Lematizador de Texto")
 
-    SPACY_MODEL = 'es_core_news_sm'
-    nlp = cargar_modelo(SPACY_MODEL)
+    # SPACY_MODEL = 'es_core_news_sm'
+    # nlp = cargar_modelo(SPACY_MODEL)
 
     DATA = "es"
     uploaded_file = ReadTextFile(f'data/data-{DATA}.txt')
