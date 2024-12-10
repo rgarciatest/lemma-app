@@ -59,19 +59,19 @@ def main():
 
     InitFirebase()
     if st.button("GET Firebase"):
-        subj = 1
-        trial = 0
-        ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial:03d}').get()
+        host = 1
+        trial = 45
+        ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').get()
         st.subheader("FB")
         st.write(ref)
 
     # if st.button("SEND Firebase"):
-    #     subj = 1
+    #     host = 1
     #     trial = random.randint(1,100)
     #     FIREBASEDATA = { "id": 1, "var1": random.randint(1,100), "var2": random.randint(1,100), "trial": trial }
-    #     ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial:03d}').update(FIREBASEDATA)
+    #     ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').child(f'trial_{trial:03d}').update(FIREBASEDATA)
     #     # ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').child(f'trial_{trial:03d}').get()
-    #     ref = CONFIG["DB"].reference('Test').child(f'host_{subj:02d}').get()
+    #     ref = CONFIG["DB"].reference('Test').child(f'host_{host:02d}').get()
     #     st.subheader("FB")
     #     st.write(ref)
 
