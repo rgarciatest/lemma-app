@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import spacy
+# import spacy
 import pickle
 import requests
 from io import BytesIO
@@ -39,15 +39,15 @@ def InitFirebase():
         else: firebase_admin.get_app()
         CONFIG["DB"] = db
 
-@st.cache_resource
-def cargar_modelo(SPACY_MODEL):
-    nlp = spacy.load(SPACY_MODEL)
-    return nlp 
+# @st.cache_resource
+# def cargar_modelo(SPACY_MODEL):
+#     nlp = spacy.load(SPACY_MODEL)
+#     return nlp 
 
-def lematizar_texto(texto, nlp):
-    doc = nlp(texto)
-    lemas = [token.lemma_ for token in doc]
-    return ' '.join(lemas)
+# def lematizar_texto(texto, nlp):
+#     doc = nlp(texto)
+#     lemas = [token.lemma_ for token in doc]
+#     return ' '.join(lemas)
 
 def main():
     height = 500
@@ -83,10 +83,10 @@ def main():
         st.subheader("Texto cargado")
         st.text_area("Texto original", texto, height=height)
         
-        # Lematizar el texto
-        texto_lema = lematizar_texto(texto, nlp)
-        st.subheader("Texto lematizado")
-        st.text_area("Texto lematizado", texto_lema, height=height)
+        # # Lematizar el texto
+        # texto_lema = lematizar_texto(texto, nlp)
+        # st.subheader("Texto lematizado")
+        # st.text_area("Texto lematizado", texto_lema, height=height)
     
 if __name__ == "__main__":
     main()
