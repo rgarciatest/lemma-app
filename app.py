@@ -32,7 +32,7 @@ def cargar_modelo():
     # with open(f"spacy_es/{SPACY_MODEL}.pkl", "rb") as f:
     #     nlp = pickle.load(f)
 
-    # nlp = spacy.load(SPACY_MODEL)
+    nlp = spacy.load(SPACY_MODEL)
     
     # texto = "Los perros corren rápidamente."
     # doc = nlp(texto)
